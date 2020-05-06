@@ -1,0 +1,20 @@
+.join-chat {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10rem;
+
+  .join-chat-card {
+    width: 23rem;
+
+    .join-chat-form {
+      margin: 1em;
+    }
+
+    .card-header {
+      font-weight: 600;
+      font-size: 1.5rem;
+      text-align: center;
+    }
+  }
+}

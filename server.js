@@ -3,6 +3,7 @@ const webpack = require('webpack')
 
 const app = express()
 
+app.use(require('connect-history-api-fallback')())
 webpackDevMiddleware()
 
 app.listen(3000, () => {
