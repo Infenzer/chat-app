@@ -2,7 +2,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   margin-top: 10rem;
+  position: relative;
+
+  @import './alert.scss';
 
   .join-chat-card {
     width: 23rem;

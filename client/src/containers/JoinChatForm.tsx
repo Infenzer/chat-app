@@ -1,14 +1,27 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { showAlert, hideAlert } from '../redux/actions/visibleAlert'
 
 const JoinChatForm: React.FC = () => {
   const [name, setName] = useState('')
   const [room, setRoom] = useState('JavaScript')
+  const dispatch = useDispatch()
   const history = useHistory()
 
   const handleClick = (e: React.MouseEvent<HTMLInputElement>) => {
     e.preventDefault()
-    history.push(`/chat/${name}/${room}`)
+
+    if (name === '') {
+      dispatch(showAlert('WARNING', 'Введите имя'))
+
+      // setTimeout(() => {
+      //   dispatch(hideAlert())
+      // }, 3000)
+    } else {
+      history.push(`/chat/${name}/${room}`)
+      dispatch(hideAlert())
+    }
   }
 
   return (
@@ -22,7 +35,6 @@ const JoinChatForm: React.FC = () => {
           placeholder='Вася'
           onChange={e => setName(e.target.value)}
           value={name} 
-          required
         />
       </div>
       <div className="form-group">
