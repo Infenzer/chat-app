@@ -1,10 +1,17 @@
 import React, { useState } from 'react'
 
-const СhatFooter: React.FC = () => {
+type ChatFooterProps = {
+  onClick: (text: string) => void
+}
+
+const СhatFooter: React.FC<ChatFooterProps> = (props) => {
   const [value, setValue] = useState('')
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
+
+    props.onClick(value)
+
     setValue('')
   }
   return (

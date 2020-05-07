@@ -12,17 +12,15 @@
   .chat-body {
     display: flex;
     padding: 0;
-    height: 40vh;
+    height: 60vh;
+
+    @import './message.scss';
 
     .chat-info {
       padding: .5em;
       width: 25%;
       height: 100%;
       border-right: 1px solid black;
-    }
-
-    .message-container {
-      width: 75%;
     }
   }
 

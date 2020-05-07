@@ -1,0 +1,18 @@
+.message-container {
+  width: 75%;
+  
+  .message-list {
+    padding: 1em 1em 0 1em;
+    margin: 0;
+  }
+
+  .message {
+    padding: .5em;
+
+    .message-time {
+      font-size: .7em;
+      font-style: italic;
+    }
+  }
+  overflow-y: auto;
+}

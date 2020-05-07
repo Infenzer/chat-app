@@ -1,2 +1,10 @@
 @import './join-chat-page/join-chat.scss';
 @import './chat-page/chat.scss';
+
+li {
+  list-style: none;
+}
+
+p {
+  margin: 0;
+}

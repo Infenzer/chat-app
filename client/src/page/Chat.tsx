@@ -3,11 +3,16 @@ import { RouteChildrenProps } from 'react-router-dom'
 import { ChatParam } from '../App'
 import ChatBody from '../components/ChatBody'
 import ChatFooter from '../components/ChatFooter'
+import useSocket from '../hooks/socket.hook'
+import { useSelector } from 'react-redux'
+import { RootState } from '../redux/reducers'
 
 interface ChatProps extends RouteChildrenProps<ChatParam>{}
 
 const Chat: React.FC<ChatProps> = (props) => {
   const params = props.match.params
+  const messList = useSelector((state: RootState) => state.messageList)
+  const socket = useSocket(params.name, params.room)
 
   return(
     <div className="chat container col-lg-8 col-sm-12">
@@ -16,8 +21,8 @@ const Chat: React.FC<ChatProps> = (props) => {
           <h2>Чат</h2>
           <a href='/' className="btn btn-outline-dark">Выйти</a>
         </div>
-        <ChatBody room={params.room}/>
-        <ChatFooter/>
+        <ChatBody room={params.room} messList={messList}/>
+        <ChatFooter onClick={socket.sendMessClick}/>
       </div>
     </div>
   )
