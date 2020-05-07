@@ -21,12 +21,11 @@
     transform: translateY(-100%);
   }
 
-  65% {
+  70% {
     opacity: .7;
-    transform: translateY(25px);
+    transform: translateY(10px);
   }
   
-
   100% {
     opacity: 1;
     transform: translateY(0);

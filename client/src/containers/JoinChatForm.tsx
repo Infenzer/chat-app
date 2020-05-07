@@ -15,9 +15,9 @@ const JoinChatForm: React.FC = () => {
     if (name === '') {
       dispatch(showAlert('WARNING', 'Введите имя'))
 
-      // setTimeout(() => {
-      //   dispatch(hideAlert())
-      // }, 3000)
+      setTimeout(() => {
+        dispatch(hideAlert())
+      }, 3000)
     } else {
       history.push(`/chat/${name}/${room}`)
       dispatch(hideAlert())
