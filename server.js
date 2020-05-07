@@ -25,6 +25,9 @@ function getUser(id) {
   return users.find(user => user.id === id)
 }
 
+// Const
+const botName = 'Чат Бот'
+
 // Socket
 io.on('connection', socket => {
   // JoinRoom
@@ -33,21 +36,23 @@ io.on('connection', socket => {
 
     socket.join(user.room)
 
-    socket.to(user.room).broadcast.emit('mess', `${user.name} присоеденился.`)
+    const mess = `${user.name} присоеденился.`
+    socket.to(user.room).broadcast.emit('mess', {mess, name: botName})
   })
 
   // SendMessage
   socket.on('mess', ({mess}) => {
     const user = getUser(socket.id)
 
-    io.to(user.room).emit('mess', mess)
+    io.to(user.room).emit('mess', {mess, name: user.name})
   })
 
   socket.on('disconnect', () => {
     const user = getUser(socket.id)
 
     if (user) {
-      socket.to(user.room).broadcast.emit('mess', `${user.name} вышел.`)
+      const mess = `${user.name} вышел.`
+      socket.to(user.room).broadcast.emit('mess', {mess, name: botName})
       deleteUser(user.id)
     }
   })

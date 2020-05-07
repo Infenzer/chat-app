@@ -12,7 +12,7 @@ const useSocket = (name: string, room: string,) => {
   useEffect(() => {
     socket.emit('joinRoom', {name, room})
 
-    socket.on('mess', mess => {
+    socket.on('mess', ({mess, name}) => {
       dispatch(addMess(mess, name))
     })
   }, [])
