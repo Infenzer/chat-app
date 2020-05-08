@@ -2,7 +2,7 @@
   width: 75%;
   
   .message-list {
-    padding: 1em 1em 0 1em;
+    padding: 1em;
     margin: 0;
   }
 
@@ -12,6 +12,7 @@
     .message-time {
       font-size: .7em;
       font-style: italic;
+      text-decoration: underline;
     }
   }
   overflow-y: auto;

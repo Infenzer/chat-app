@@ -7,23 +7,12 @@ const server = http.createServer(app)
 const io = require('socket.io')(server)
 
 // Util
-let users = []
-
-function addUser(id, name, room) {
-  const user = {id, name, room}
-
-  users.push(user)
-
-  return user
-}
-
-function deleteUser(id) {
-  users = users.filter(user => user.id !== id)
-}
-
-function getUser(id) {
-  return users.find(user => user.id === id)
-}
+const {
+  getUser,
+  addUser,
+  users,
+  deleteUser
+} = require('./utils/users')
 
 // Const
 const botName = 'Чат Бот'
@@ -36,23 +25,37 @@ io.on('connection', socket => {
 
     socket.join(user.room)
 
-    const mess = `${user.name} присоеденился.`
-    socket.to(user.room).broadcast.emit('mess', {mess, name: botName})
+    const resMess = {
+      text: `${user.name} присоединился.`,
+      name: botName,
+      messColor: '#fff'
+    }
+    socket.to(user.room).broadcast.emit('mess', resMess)
   })
 
   // SendMessage
   socket.on('mess', ({mess}) => {
     const user = getUser(socket.id)
 
-    io.to(user.room).emit('mess', {mess, name: user.name})
+    const resMess = {
+      text: mess,
+      name: user.name,
+      messColor: user.messColor
+    }
+
+    io.to(user.room).emit('mess', resMess)
   })
 
   socket.on('disconnect', () => {
     const user = getUser(socket.id)
 
     if (user) {
-      const mess = `${user.name} вышел.`
-      socket.to(user.room).broadcast.emit('mess', {mess, name: botName})
+      const resMess = {
+        text: `${user.name} вышел.`,
+        name: botName,
+        messColor: '#fff'
+      }
+      socket.to(user.room).broadcast.emit('mess', resMess)
       deleteUser(user.id)
     }
   })

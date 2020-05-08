@@ -1,5 +1,5 @@
 import React from 'react'
-import messageList, {IMessage} from '../redux/reducers/messageList'
+import {IMessage} from '../redux/reducers/messageList'
 import Message from './Message'
 
 interface ChatBodyProps {
