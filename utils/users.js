@@ -11,22 +11,21 @@ function addUser(id, name, room) {
     }
 
   users.push(user)
-
   return user
 }
 
 function deleteUser(id) {
-  users = users.filter(user => user.id !== id)
+  users = users.filter(user => {
+    return user.id !== id
+  })
 }
 
-function getUser(id) {
-  return users.find(user => user.id === id)
+function getUsers(roomName) {
+  return users.filter(user => user.room == roomName)
 }
-
 
 module.exports = {
-  users,
+  getUsers,
   addUser,
-  deleteUser,
-  getUser
+  deleteUser
 }

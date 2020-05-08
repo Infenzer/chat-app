@@ -12,6 +12,7 @@ interface ChatProps extends RouteChildrenProps<ChatParam>{}
 const Chat: React.FC<ChatProps> = (props) => {
   const params = props.match.params
   const messList = useSelector((state: RootState) => state.messageList)
+  const users = useSelector((state: RootState) => state.users)
   const socket = useSocket(params.name, params.room)
 
   return(
@@ -21,7 +22,11 @@ const Chat: React.FC<ChatProps> = (props) => {
           <h2>Чат</h2>
           <a href='/' className="btn btn-outline-dark">Выйти</a>
         </div>
-        <ChatBody room={params.room} messList={messList}/>
+        <ChatBody 
+          room={params.room} 
+          messList={messList}
+          users={users}
+        />
         <ChatFooter onClick={socket.sendMessClick}/>
       </div>
     </div>

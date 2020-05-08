@@ -8,56 +8,46 @@ const io = require('socket.io')(server)
 
 // Util
 const {
-  getUser,
   addUser,
-  users,
+  getUsers,
   deleteUser
 } = require('./utils/users')
-
-// Const
-const botName = 'Чат Бот'
+const botMessage = require('./utils/bot')
 
 // Socket
 io.on('connection', socket => {
   // JoinRoom
   socket.on('joinRoom', ({name, room}) => {
     const user = addUser(socket.id, name, room)
-
+    const users = getUsers(user.room)
     socket.join(user.room)
 
-    const resMess = {
-      text: `${user.name} присоединился.`,
-      name: botName,
-      messColor: '#fff'
-    }
+    const resMess = botMessage(`${user.name} присоединился.`)
     socket.to(user.room).broadcast.emit('mess', resMess)
-  })
 
-  // SendMessage
-  socket.on('mess', ({mess}) => {
-    const user = getUser(socket.id)
+    io.to(user.room).emit('joinRoom', { users })
 
-    const resMess = {
-      text: mess,
-      name: user.name,
-      messColor: user.messColor
-    }
-
-    io.to(user.room).emit('mess', resMess)
-  })
-
-  socket.on('disconnect', () => {
-    const user = getUser(socket.id)
-
-    if (user) {
+     // SendMessage
+    socket.on('mess', ({mess}) => {
       const resMess = {
-        text: `${user.name} вышел.`,
-        name: botName,
-        messColor: '#fff'
+        text: mess,
+        name: user.name,
+        messColor: user.messColor
       }
-      socket.to(user.room).broadcast.emit('mess', resMess)
-      deleteUser(user.id)
-    }
+
+      io.to(user.room).emit('mess', resMess)
+    })
+    
+    // Disconnect
+    socket.on('disconnect', () => {
+      if (user) {
+        const resMess = botMessage(`${user.name} вышел.`)
+
+        socket.to(user.room).broadcast.emit('mess', resMess)
+        socket.to(user.room).broadcast.emit('leaveRoom', { id: socket.id })
+      }
+      deleteUser(socket.id)
+    })
   })
 })
 

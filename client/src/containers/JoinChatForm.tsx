@@ -46,7 +46,7 @@ const JoinChatForm: React.FC = () => {
         >
           <option value="JavaScript">JavaScript</option>
           <option value="Python">Python</option>
-          <option value="RussianLan">Русский язык</option>
+          <option value="Русский язык">Русский язык</option>
         </select>
       </div>
       <input 

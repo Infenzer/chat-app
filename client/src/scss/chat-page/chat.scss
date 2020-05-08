@@ -21,6 +21,16 @@
       width: 25%;
       height: 100%;
       border-right: 1px solid black;
+
+      .room-name { 
+        text-align: center;
+        border-bottom: 1px solid black;
+        padding-bottom: .5em;
+      }
+
+      .user {
+        padding: .5em;
+      }
     }
   }
 
