@@ -9,6 +9,8 @@ import { RootState } from '../redux/reducers'
 
 interface ChatProps extends RouteChildrenProps<ChatParam>{}
 
+const ChatIcon = <i className="far fa-comment"></i>
+
 const Chat: React.FC<ChatProps> = (props) => {
   const params = props.match.params
   const messList = useSelector((state: RootState) => state.messageList)
@@ -19,7 +21,7 @@ const Chat: React.FC<ChatProps> = (props) => {
     <div className="chat container col-lg-8 col-sm-12">
       <div className="card border-dark">
         <div className="chat-header card-header">
-          <h2>Чат</h2>
+          <h2>{ChatIcon} Чат</h2>
           <a href='/' className="btn btn-outline-dark">Выйти</a>
         </div>
         <ChatBody 

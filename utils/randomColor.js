@@ -7,7 +7,7 @@ const randomColor = () => {
 
     // Отсеивание слишком тёмных тонов
     if (i === 0) {
-      min = 6
+      min = 8
     }
 
     let randomNum = Math.floor(Math.random() * (max - min)) + min

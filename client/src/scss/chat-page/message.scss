@@ -1,5 +1,6 @@
 .message-container {
   width: 75%;
+  overflow-y: auto;
   
   .message-list {
     padding: 1em;
@@ -15,5 +16,4 @@
       text-decoration: underline;
     }
   }
-  overflow-y: auto;
 }
