@@ -16,6 +16,7 @@ const botMessage = require('./utils/bot')
 
 // Socket
 io.on('connection', socket => {
+  let muteList = []
   // JoinRoom
   socket.on('joinRoom', ({name, room}) => {
     const user = addUser(socket.id, name, room)
@@ -25,17 +26,29 @@ io.on('connection', socket => {
     const resMess = botMessage(`${user.name} присоединился.`)
     socket.to(user.room).broadcast.emit('mess', resMess)
 
-    io.to(user.room).emit('joinRoom', { users })
+    io.to(user.room).emit('joinRoom', users)
 
      // SendMessage
     socket.on('mess', ({mess}) => {
       const resMess = {
         text: mess,
         name: user.name,
-        messColor: user.messColor
+        messColor: user.messColor,
+        ownerId: user.id
       }
 
       io.to(user.room).emit('mess', resMess)
+    })
+
+    // Mute
+    socket.on('mute', (muteUserId, options) => {
+      if (options === 'delete') {
+        muteList = muteList.filter(muteId => muteId !== muteUserId)
+      } else {
+        muteList.push(muteUserId)
+      }
+      
+      socket.emit('mute', muteList)
     })
     
     // Disconnect

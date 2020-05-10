@@ -17,11 +17,8 @@ const messageList = (state = [], action: ActionType): IMessage[] => {
       return [
         ...state,
         {
-          text: action.payload.text,
           id: action.id,
-          name: action.payload.name,
-          time: action.payload.time,
-          color: action.payload.color
+          ...action.payload
         }
       ]
     default: return state

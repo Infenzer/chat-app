@@ -4,7 +4,8 @@ function botMessage (text) {
   const mess = {
     text: text,
     name: botName,
-    messColor: '#fff'
+    messColor: '#fff',
+    ownerId: botName
   }
   
   return mess

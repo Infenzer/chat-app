@@ -28,6 +28,8 @@ const Chat: React.FC<ChatProps> = (props) => {
           room={params.room} 
           messList={messList}
           users={users}
+          logInUser={socket.logInUserId}
+          muteClick={socket.muteClick}
         />
         <ChatFooter onClick={socket.sendMessClick}/>
       </div>

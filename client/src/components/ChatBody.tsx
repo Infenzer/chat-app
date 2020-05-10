@@ -8,6 +8,8 @@ interface ChatBodyProps {
   room: string
   messList: IMessage[]
   users: IUser[]
+  logInUser: string
+  muteClick: (id: string, options: string) => void
 }
 
 const usersIcon = <i className="fas fa-users"></i>
@@ -25,7 +27,12 @@ const ChatBody: React.FC<ChatBodyProps> = (props) => {
         <h4 className="room-name"> {props.room} </h4>
         <p>{usersIcon} Подключены:</p>
         <ul className="users-list list-group">
-          {props.users.map(user => <User key={user.id} {...user}/>)}
+          {props.users.map(user => <User 
+            key={user.id} 
+            {...user} 
+            logInUser={props.logInUser}
+            muteClick={props.muteClick}
+          />)}
         </ul>
       </div>
       <div className="message-container" ref={messContainer}>
