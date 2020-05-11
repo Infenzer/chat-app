@@ -22,16 +22,12 @@
       height: 100%;
       border-right: 1px solid black;
 
+      @import './user.scss';
+
       .room-name { 
         text-align: center;
         border-bottom: 1px solid black;
         padding-bottom: .5em;
-      }
-
-      .user {
-        display: flex;
-        justify-content: space-between;
-        padding: .5em;
       }
     }
   }

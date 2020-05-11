@@ -1,0 +1,19 @@
+.user {
+  display: flex;
+  justify-content: space-between;
+  padding: .5em;
+}
+
+.user-enter {
+  opacity: 0;
+}
+
+.user-enter-active {
+  transition: 450ms;
+  opacity: 1;
+}
+
+.user-exit-active {
+  opacity: 0;
+  transition: 450ms;
+}

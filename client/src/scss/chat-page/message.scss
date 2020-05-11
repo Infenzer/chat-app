@@ -1,6 +1,7 @@
 .message-container {
   width: 75%;
   overflow-y: auto;
+  overflow-x: hidden;
   
   .message-list {
     padding: 1em;
@@ -14,6 +15,27 @@
       font-size: .7em;
       font-style: italic;
       text-decoration: underline;
+    }
+  }
+
+  .message-enter-active {
+    animation: message 650ms ease-in;
+  }
+
+  @keyframes message {
+    0% {
+      transform: translateX(-50%);
+      opacity: 0;
+    }
+
+    70% {
+      transform: translateX(5%);
+      opacity: .6;
+    }
+
+    100% {
+      transform: translateX(0);
+      opacity: 1;
     }
   }
 }
