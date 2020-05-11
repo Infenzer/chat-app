@@ -11,16 +11,23 @@ export interface IMessage {
 
 type ActionType = IAddMess
 
+const messLimit = 200
 const messageList = (state = [], action: ActionType): IMessage[] => {
   switch(action.type) {
     case 'ADD_MESSAGE':
-      return [
+      let newState = [
         ...state,
         {
           id: action.id,
           ...action.payload
         }
       ]
+
+      if (state.length >= messLimit) {
+        newState.shift()
+      }
+
+      return newState
     default: return state
   }
 }
