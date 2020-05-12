@@ -54,7 +54,7 @@ io.on('connection', socket => {
     // Message listener
     socket.on('messListener', (id, active) => {
       const user = users.find(user => user.id === id)
-      io.to(user.room).emit('messListener', {id, name: user.name}, active)
+      socket.to(user.room).broadcast.emit('messListener', {id, name: user.name}, active)
     })
     
     // Disconnect
@@ -64,6 +64,7 @@ io.on('connection', socket => {
 
         socket.to(user.room).broadcast.emit('mess', resMess)
         socket.to(user.room).broadcast.emit('leaveRoom', { id: socket.id })
+        socket.to(user.room).broadcast.emit('messListener', {id: user.id, name: user.name}, false)
       }
       deleteUser(socket.id)
     })

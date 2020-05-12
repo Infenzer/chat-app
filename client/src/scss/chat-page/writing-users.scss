@@ -1,0 +1,16 @@
+.writing-users {
+  position: absolute;
+  left: 30%;
+  top: 94%;
+  transition: 1s;
+}
+
+.writing-enter {
+  opacity: 0;
+}
+
+.writing-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-out;
+}
+

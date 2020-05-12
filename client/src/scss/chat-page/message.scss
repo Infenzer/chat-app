@@ -3,11 +3,7 @@
   overflow-y: auto;
   overflow-x: hidden;
 
-  .writing-users {
-    position: absolute;
-    left: 30%;
-    top: 94%;
-  }
+  @import './writing-users.scss';
   
   .message-list {
     padding: 1em;

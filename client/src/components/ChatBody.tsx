@@ -1,16 +1,12 @@
 import React, { useRef, useLayoutEffect } from 'react'
-import {IMessage} from '../redux/reducers/messageList'
 import Message from './Message'
-import { IUser } from '../redux/reducers/users'
 import User from './User'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
-import WritingUsers from '../containers/WritingUsers'
+import WritingUsers from './WritingUsers'
+import { connect, ConnectedProps } from 'react-redux'
+import { RootState } from '../redux/reducers'
 
-interface ChatBodyProps {
-  room: string
-  messList: IMessage[]
-  users: IUser[]
-}
+type ChatBodyProps = ConnectedProps<typeof connector>
 
 const usersIcon = <i className="fas fa-users"></i>
 
@@ -49,10 +45,8 @@ const ChatBody: React.FC<ChatBodyProps> = (props) => {
             {...mess}
           />
         </CSSTransition>
-      
       )}
     </TransitionGroup>
-    
   )
     
   return (
@@ -70,4 +64,15 @@ const ChatBody: React.FC<ChatBodyProps> = (props) => {
   )
 }
 
-export default ChatBody
+interface IOwnProps {
+  room: string
+}
+
+const mapStateToProps = (state: RootState, ownProps: IOwnProps) => ({
+  room: ownProps.room,
+  users: state.users,
+  messList: state.messageList
+})
+
+const connector = connect(mapStateToProps)
+export default connector(ChatBody)
