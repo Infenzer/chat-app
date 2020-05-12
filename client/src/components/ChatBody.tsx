@@ -4,6 +4,7 @@ import Message from './Message'
 import { IUser } from '../redux/reducers/users'
 import User from './User'
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
+import WritingUsers from '../containers/WritingUsers'
 
 interface ChatBodyProps {
   room: string
@@ -51,6 +52,7 @@ const ChatBody: React.FC<ChatBodyProps> = (props) => {
       
       )}
     </TransitionGroup>
+    
   )
     
   return (
@@ -62,6 +64,7 @@ const ChatBody: React.FC<ChatBodyProps> = (props) => {
       </div>
       <div className="message-container" ref={messContainer}>
         {messageList}
+        <WritingUsers/>
       </div>
     </div>
   )

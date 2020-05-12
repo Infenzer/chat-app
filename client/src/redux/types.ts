@@ -8,3 +8,8 @@ export const ADD_MESSAGE = 'ADD_MESSAGE'
 // users
 export const LOAD_USERS = 'LOAD_USERES'
 export const USER_DISCONNECTED = 'USER_DISCONNECTED'
+
+// Writing users
+
+export const ADD_WRITING_USER = 'ADD_WRITING_USER'
+export const DELETE_WRITING_USER = 'DELETE_WRITING_USER'

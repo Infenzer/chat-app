@@ -16,7 +16,6 @@ const botMessage = require('./utils/bot')
 
 // Socket
 io.on('connection', socket => {
-  console.log('user join')
   let muteList = []
   // JoinRoom
   socket.on('joinRoom', ({name, room}) => {
@@ -50,6 +49,12 @@ io.on('connection', socket => {
       }
       
       socket.emit('mute', muteList)
+    })
+
+    // Message listener
+    socket.on('messListener', (id, active) => {
+      const user = users.find(user => user.id === id)
+      io.to(user.room).emit('messListener', {id, name: user.name}, active)
     })
     
     // Disconnect

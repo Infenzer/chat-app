@@ -2,6 +2,12 @@
   width: 75%;
   overflow-y: auto;
   overflow-x: hidden;
+
+  .writing-users {
+    position: absolute;
+    left: 30%;
+    top: 94%;
+  }
   
   .message-list {
     padding: 1em;

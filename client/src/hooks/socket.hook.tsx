@@ -3,6 +3,7 @@ import {addMess} from '../redux/actions/messAction'
 import { useEffect, useMemo } from 'react'
 import { loadUsers, userDisconnect } from '../redux/actions/userAction'
 import socket, { joinRoom } from '../socket'
+import { addWritingUser, deleteWritingUser } from '../redux/actions/writingUsersAction'
 
 const useSocket = (name: string, room: string) => {
   const dispatch = useDispatch()
@@ -39,6 +40,15 @@ const useSocket = (name: string, room: string) => {
     // Mute
     socket.on('mute', muteL => {
       muteList = muteL
+    })
+
+    // Message Listner
+    socket.on('messListener', ({id, name}, active) => {
+      if (active) {
+        dispatch(addWritingUser(id, name))
+      } else {
+        dispatch(deleteWritingUser(id))
+      }
     })
   }, [])
 }
