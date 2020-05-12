@@ -1,16 +1,13 @@
 import React, { useState } from 'react'
+import { sendMessClick } from '../socket'
 
-type ChatFooterProps = {
-  onClick: (text: string) => void
-}
-
-const СhatFooter: React.FC<ChatFooterProps> = (props) => {
+const СhatFooter: React.FC = () => {
   const [value, setValue] = useState('')
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
 
-    props.onClick(value)
+    sendMessClick(value)
 
     setValue('')
   }

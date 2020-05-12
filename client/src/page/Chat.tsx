@@ -15,7 +15,7 @@ const Chat: React.FC<ChatProps> = (props) => {
   const params = props.match.params
   const messList = useSelector((state: RootState) => state.messageList)
   const users = useSelector((state: RootState) => state.users)
-  const socket = useSocket(params.name, params.room)
+  useSocket(params.name, params.room)
 
   return(
     <div className="chat container col-lg-8 col-sm-12">
@@ -28,10 +28,8 @@ const Chat: React.FC<ChatProps> = (props) => {
           room={params.room} 
           messList={messList}
           users={users}
-          logInUser={socket.logInUserId}
-          muteClick={socket.muteClick}
         />
-        <ChatFooter onClick={socket.sendMessClick}/>
+        <ChatFooter/>
       </div>
     </div>
   )

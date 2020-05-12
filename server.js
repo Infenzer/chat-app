@@ -16,6 +16,7 @@ const botMessage = require('./utils/bot')
 
 // Socket
 io.on('connection', socket => {
+  console.log('user join')
   let muteList = []
   // JoinRoom
   socket.on('joinRoom', ({name, room}) => {

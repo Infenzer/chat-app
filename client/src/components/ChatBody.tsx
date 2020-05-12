@@ -9,8 +9,6 @@ interface ChatBodyProps {
   room: string
   messList: IMessage[]
   users: IUser[]
-  logInUser: string
-  muteClick: (id: string, options: string) => void
 }
 
 const usersIcon = <i className="fas fa-users"></i>
@@ -32,8 +30,6 @@ const ChatBody: React.FC<ChatBodyProps> = (props) => {
         >
           <User 
             {...user} 
-            logInUser={props.logInUser}
-            muteClick={props.muteClick}
           />
         </CSSTransition>
       )}
