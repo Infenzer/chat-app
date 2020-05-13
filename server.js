@@ -9,6 +9,8 @@ const io = require('socket.io')(server)
 
 const isProd = process.env.NODE_ENV === 'prod' || false
 
+app.use(require('connect-history-api-fallback')())
+
 // Util
 const {
   addUser,
@@ -83,8 +85,6 @@ if (isProd) {
 start()
 
 function start() {
-  app.use(require('connect-history-api-fallback')())
-
   server.listen(3000, () => {
     console.log('Server started...')
   })

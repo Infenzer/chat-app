@@ -13,7 +13,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/react-transition-group": "^4.2.4",
     "connect-history-api-fallback": "^1.6.0",
     "core-js": "^3.6.5",
     "cross-env": "^7.0.2",
