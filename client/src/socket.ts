@@ -1,7 +1,9 @@
-import io from 'socket.io-client'
-
-const socket = io({
-  autoConnect: false
+let socket
+import ('socket.io-client').then( module => {
+  const io = module.default
+  socket = io({
+    autoConnect: false
+  })
 })
 
 export const muteClick = (id: string, options: string) => {

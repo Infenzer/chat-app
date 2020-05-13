@@ -1,10 +1,13 @@
 const express = require('express')
 const webpack = require('webpack')
 const http = require('http')
+const path = require('path')
 
 const app = express()
 const server = http.createServer(app)
 const io = require('socket.io')(server)
+
+const isProd = process.env.NODE_ENV === 'prod' || false
 
 // Util
 const {
@@ -71,11 +74,16 @@ io.on('connection', socket => {
   })
 })
 
+if (isProd) {
+  app.use(express.static(path.resolve(__dirname, 'client', 'public')))
+} else {
+  webpackDevMiddleware()
+}
+
 start()
 
 function start() {
   app.use(require('connect-history-api-fallback')())
-  webpackDevMiddleware()
 
   server.listen(3000, () => {
     console.log('Server started...')

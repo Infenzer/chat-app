@@ -12,7 +12,6 @@ const WritingUsers: React.FC = () => {
   let text = ''
 
   useEffect(() => {
-    console.log('helo')
     // Message Listner
     socket.on('messListener', ({id, name}, active) => {
       if (active) {
