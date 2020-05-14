@@ -8,7 +8,7 @@ export type RootState = ReturnType<typeof rootReducer>
 const rootReducer = combineReducers({
   messageList,
   alert,
-  users
+  users,
 })
 
 export default rootReducer

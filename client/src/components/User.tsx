@@ -1,10 +1,8 @@
 import React, { useState } from 'react'
 import { IUser } from '../redux/reducers/users'
+import socket, { muteClick } from '../socket'
 
-type UserProps = IUser & {
-  logInUser: string
-  muteClick: (id: string, options: string) => void
-}
+type UserProps = IUser
 
 const micOffIcon = <i style={{color: 'black'}} className="fas fa-microphone-slash"></i>
 const micOnIcon = <i style={{color: 'black'}} className="fas fa-microphone"></i>
@@ -19,9 +17,9 @@ const User: React.FC<UserProps> = (props) => {
     setMute((prevState) => !prevState)
 
     if (!mute) {
-      props.muteClick(props.id, 'add')
+      muteClick(props.id, 'add')
     } else {
-      props.muteClick(props.id, 'delete')
+      muteClick(props.id, 'delete')
     }
   }
 
@@ -30,7 +28,7 @@ const User: React.FC<UserProps> = (props) => {
       <div className="user-name">
         {props.name}
       </div>
-      {props.logInUser !== props.id && (
+      {socket.id !== props.id && (
         <a className="user-mic" href="#" onClick={() => handleClick()}>
           {mute 
             ? micOffIcon

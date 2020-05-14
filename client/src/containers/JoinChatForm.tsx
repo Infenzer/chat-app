@@ -12,7 +12,9 @@ const JoinChatForm: React.FC = () => {
   const handleClick = (e: React.MouseEvent<HTMLInputElement>) => {
     e.preventDefault()
 
-    if (name === '' || name === 'Чат Бот') {
+    const exp = /чат|бот\i/
+
+    if (name === '' || exp.test(name)) {
       dispatch(showAlert('WARNING', 'Введите имя'))
 
       setTimeout(() => {

@@ -2,6 +2,8 @@
   width: 75%;
   overflow-y: auto;
   overflow-x: hidden;
+
+  @import './writing-users.scss';
   
   .message-list {
     padding: 1em;

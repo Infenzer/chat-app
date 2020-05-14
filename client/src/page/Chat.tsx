@@ -4,8 +4,6 @@ import { ChatParam } from '../App'
 import ChatBody from '../components/ChatBody'
 import ChatFooter from '../components/ChatFooter'
 import useSocket from '../hooks/socket.hook'
-import { useSelector } from 'react-redux'
-import { RootState } from '../redux/reducers'
 
 interface ChatProps extends RouteChildrenProps<ChatParam>{}
 
@@ -13,9 +11,7 @@ const ChatIcon = <i className="far fa-comment"></i>
 
 const Chat: React.FC<ChatProps> = (props) => {
   const params = props.match.params
-  const messList = useSelector((state: RootState) => state.messageList)
-  const users = useSelector((state: RootState) => state.users)
-  const socket = useSocket(params.name, params.room)
+  useSocket(params.name, params.room)
 
   return(
     <div className="chat container col-lg-8 col-sm-12">
@@ -26,12 +22,8 @@ const Chat: React.FC<ChatProps> = (props) => {
         </div>
         <ChatBody 
           room={params.room} 
-          messList={messList}
-          users={users}
-          logInUser={socket.logInUserId}
-          muteClick={socket.muteClick}
         />
-        <ChatFooter onClick={socket.sendMessClick}/>
+        <ChatFooter/>
       </div>
     </div>
   )

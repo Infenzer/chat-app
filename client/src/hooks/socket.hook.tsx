@@ -1,18 +1,17 @@
-import io from 'socket.io-client'
 import { useDispatch } from 'react-redux'
 import {addMess} from '../redux/actions/messAction'
 import { useEffect, useMemo } from 'react'
 import { loadUsers, userDisconnect } from '../redux/actions/userAction'
+import socket, { joinRoom } from '../socket'
 
-const useSocket = (name: string, room: string,) => {
+const useSocket = (name: string, room: string) => {
   const dispatch = useDispatch()
-  const socket = useMemo(() => io(), [])
+  useMemo(() => socket.open(), [])
 
   useEffect(() => {
     let muteList = []
     // joinRoom socket
-    socket.emit('joinRoom', {name, room})
-
+    joinRoom(name, room)
     socket.on('joinRoom', users => {
       dispatch(loadUsers(users))
     })
@@ -42,22 +41,6 @@ const useSocket = (name: string, room: string,) => {
       muteList = muteL
     })
   }, [])
-
-  const muteClick = (id: string, options: string) => {
-    socket.emit('mute', id, options)
-  }
-
-  const sendMessClick = (text: string) => {
-    if (text !== '') {
-      socket.emit('mess', {mess: text, name})
-    }
-  }
-
-  return {
-    sendMessClick,
-    logInUserId: socket.id,
-    muteClick
-  }
 }
 
 export default useSocket

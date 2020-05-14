@@ -1,19 +1,25 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import socket, { sendMessClick, messListener } from '../socket'
 
-type ChatFooterProps = {
-  onClick: (text: string) => void
-}
-
-const СhatFooter: React.FC<ChatFooterProps> = (props) => {
+const СhatFooter: React.FC = () => {
   const [value, setValue] = useState('')
+
+  useEffect(() => {
+    messListener(value, socket.id)
+  }, [value.length > 0])
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
 
-    props.onClick(value)
+    sendMessClick(value)
 
     setValue('')
   }
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value)
+  }
+
   return (
     <div className="chat-footer card-footer text-muted">
       <form className="send-message-form">
@@ -21,7 +27,7 @@ const СhatFooter: React.FC<ChatFooterProps> = (props) => {
           className="form-control mr-2" 
           type="text" 
           value={value}
-          onChange={e => setValue(e.target.value)}
+          onChange={e => handleChange(e)}
         />
         <button 
           className="btn btn-outline-dark" 
