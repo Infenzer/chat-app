@@ -12,9 +12,9 @@ const JoinChatForm: React.FC = () => {
   const handleClick = (e: React.MouseEvent<HTMLInputElement>) => {
     e.preventDefault()
 
-    const exp = new RegExp('чат|бот')
+    const exp = /чат|бот\i/
 
-    if (name === '' || exp.test(name.toLocaleLowerCase())) {
+    if (name === '' || exp.test(name)) {
       dispatch(showAlert('WARNING', 'Введите имя'))
 
       setTimeout(() => {
