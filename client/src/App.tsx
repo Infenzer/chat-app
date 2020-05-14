@@ -2,7 +2,7 @@ import React from 'react'
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
 import joinChat from './page/JoinChat'
 import './scss/style.scss'
-// import Chat from './page/Chat'
+import Loader from './components/Loader'
 
 const Chat = React.lazy(() => import('./page/Chat'))
  
@@ -14,7 +14,7 @@ export interface ChatParam {
 const App: React.FC = () => {
   return (
     <BrowserRouter>
-      <React.Suspense fallback={<p>Loading...</p>}>
+      <React.Suspense fallback={<Loader/>}>
         <Switch>
           <Route exact path='/' component={joinChat}/>
           <Route exact path='/chat/:name/:room' component={Chat}/>
