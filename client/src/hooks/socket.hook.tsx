@@ -40,6 +40,11 @@ const useSocket = (name: string, room: string) => {
     socket.on('mute', muteL => {
       muteList = muteL
     })
+
+    return () => {
+      dispatch(userDisconnect(socket.id))
+      socket.close()
+    }
   }, [])
 }
 
